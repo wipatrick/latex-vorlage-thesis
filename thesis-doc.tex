@@ -1,0 +1,111 @@
+%
+% thesis-doc
+%
+% @version 1.0
+% @author wipatrick
+% @created 18. Oktober 2014
+% @edited 
+%
+%----------------------------------------------------------------------------------------------------------------------
+% Definition
+%----------------------------------------------------------------------------------------------------------------------
+\documentclass[
+11pt, 						                                   % Schriftgröße
+oneside, 					                                   % Einseitiges Dokument
+a4paper,  				 	                                   % DINA4
+BCOR10mm, 					                                   % Kleberand
+%nochapterprefix, 			                                   % Zusatz  Kapitel anschalten
+%noappendixprefix, 			                                   % Zusatz  beim Anhang abschalten
+numbers=noenddot,			                                   % Kein Punkt am Ende der Nummerierung
+bibliography=totoc,			                                   % Literaturverzeichnis ins ToC
+listof=totoc, 				                                   % Abbildungs- und Tabellenverzeichnis ins ToC
+headsepline,				                                   % Linie unter Kopfzeile
+parskip,					                                   % Absatz nicht einrücken
+listof=nochaptergap			                                   % Kein vertikaler Abstand zw. Abb./Tab. untersch. Kapitel
+]{scrreprt}
+\usepackage{etex}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Präambel
+%----------------------------------------------------------------------------------------------------------------------
+\input{präambel/package}
+\usepackage{blindtext}        
+
+%----------------------------------------------------------------------------------------------------------------------
+% Abkürzungen und Symbole laden
+%----------------------------------------------------------------------------------------------------------------------
+\input{verzeichnis/acronym}
+\input{verzeichnis/symbol}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Beginn des Dokuments
+%----------------------------------------------------------------------------------------------------------------------
+\begin{document}
+
+\addtocontents{lot}{\vskip 0.4cm}
+\addtocontents{lof}{\vskip 0.4cm}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Einbindung von Deckblatt, (Sperrvermerk), Kurzfassung, (Danksagung & Vorwort)
+%----------------------------------------------------------------------------------------------------------------------
+\include{deckblatt/deckblatt}
+\include{vorspann/sperrvermerk}
+\include{vorspann/kurzfassung}
+\include{vorspann/danksagung}
+\include{vorspann/vorwort}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Verzeichnisse 
+%----------------------------------------------------------------------------------------------------------------------
+
+% Inhaltsverzeichnis 
+\pagenumbering{Roman}
+\setcounter{page}{1} 
+\tableofcontents
+\clearpage
+
+% Tabellenverzeichnis 
+\setcounter{tocdepth}{2}
+\listoftables
+\clearpage
+
+% Abbildungsverzeichnis
+\listoffigures
+\clearpage
+
+% Quelltextverzeichnis
+%\renewcommand*{\thelstlisting}{List.~\arabic{lstlisting}}
+%\renewcommand*{\lstlistlistingname}{Quelltextverzeichnis}
+%\lstlistoflistings
+
+% Abkürzungsverzeichnis & Symbolverzeichnis
+\glsaddall
+\printglossary[title=Abkürzungsverzeichnis,toctitle=Abkürzungsverzeichnis, type=\acronymtype,style=myacrstyle]
+\printglossary[title=Symbolverzeichnis,toctitle=Symbolverzeichnis,type=symbols, style=mysymbstyle]
+
+%----------------------------------------------------------------------------------------------------------------------
+% Inhalt der Arbeit 
+%----------------------------------------------------------------------------------------------------------------------
+\include{kapitel/01-einleitung}
+\include{kapitel/02-theorie}
+\include{kapitel/03-schlussteil}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Anhang 
+%----------------------------------------------------------------------------------------------------------------------
+%\include{anhang/anhang}
+%\captionsetup{list=false}                                    % Inhalts-VZ ohne Anhangbilder, aber im Anhang nummeriert
+
+%----------------------------------------------------------------------------------------------------------------------
+% Literaturverzeichnis 
+%----------------------------------------------------------------------------------------------------------------------
+\bibliographystyle{natdin}
+\bibliography{literatur}
+\clearpage
+
+%----------------------------------------------------------------------------------------------------------------------
+% Eidesstattliche Erklärung 
+%----------------------------------------------------------------------------------------------------------------------
+\include{sonstiges/eiderklaerung}
+
+\end{document}

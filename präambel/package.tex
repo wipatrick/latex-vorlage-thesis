@@ -1,0 +1,456 @@
+%
+% präambel packages
+%
+% @version 1.0
+% @author wipatrick
+% @created 1. September 2014
+% @edited  
+%
+%----------------------------------------------------------------------------------------------------------------------
+% Allgemeines
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}                                         % wichtig für Trennung von Wörtern mit Umlauten
+\usepackage{lmodern}
+\usepackage{microtype}                                           % verbesserter Randausgleich
+\usepackage{url}                                                 % zum Zitieren von url
+%\urlstyle{rm}                                                   % Serifenstil für URL im Literaturverzeichnis
+%\usepackage[singlelinecheck=false]{caption}                     %justification=RaggedRight, linksbündige 
+\usepackage{multirow}
+\usepackage{lipsum}
+\usepackage{textcomp}                                            % Nummer-Zeichen \textdegree N°
+\usepackage{xcolor}                                              % definiert, dass hyperlinks nicht gefärbt sind
+\definecolor{black}{gray}{0}                                     % 10% gray
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
+\renewcommand*{\theHsection}{\thesection}                        % Anhang richtig verlinkt im InhaltsVZ
+\usepackage[ngerman]{babel}                                      % deutsche Trennregeln
+
+%----------------------------------------------------------------------------------------------------------------------
+% Radar Chart
+%----------------------------------------------------------------------------------------------------------------------
+\PassOptionsToPackage{pdf}{pstricks}                             % used for pdflatex
+\usepackage{pstricks-add}
+
+\usepackage{dirtree}                                             % Verzeichnisstruktur 
+\usepackage{calc}                                                % Listing Nummer Abstand
+\usepackage{pifont}                                              % Checkmark
+
+
+%\usepackage{cite}
+\usepackage[square]{natbib}
+\setlength{\bibsep}{0.25cm}
+\renewcommand{\bibfont}{\small} %\normalsize
+\renewcommand*{\bibpreamble}{\interlinepenalty10000\relax}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Gänsefüßchen
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage{xspace}                                              % Gänsefüßchen
+\newcommand{\Gu}{\glqq{}}		                                  % Gänsefüßchen unten
+\newcommand{\Go}{\grqq\xspace} 	                                  % Gänsefüßchen oben
+
+
+%----------------------------------------------------------------------------------------------------------------------
+% Layout
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage[automark]{scrpage2}
+\automark[section]{chapter} 
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead{\leftmark}
+\ohead{\pagemark}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\renewcommand*{\indexpagestyle}{scrheadings}
+\usepackage[left=30mm,right=38mm,top=30mm,bottom=20mm]{geometry}
+%\addtokomafont{sectioning}{\rmfamily} %Serifenstyle für Section
+\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
+\renewcommand{\chapterheadendvskip}{\vspace*{0.7\baselineskip}}
+\setkomafont{chapterprefix}{\large} % Kapitelpräfixgröße
+\setkomafont{chapter}{\LARGE} % Kapitelgröße
+\setlength{\parskip}{0.7EM} %Paragraphen/Absatzabstand
+
+% Überschriften Serifen-Schriftart 
+%\addtokomafont{chapter}{\rmfamily}                               
+%\addtokomafont{section}{\rmfamily} 
+%\addtokomafont{subsection}{\rmfamily} 
+%\addtokomafont{subsubsection}{\rmfamily} 
+
+%----------------------------------------------------------------------------------------------------------------------
+% Tabellen- und Abbildungsverzeichnis
+%----------------------------------------------------------------------------------------------------------------------
+\makeatletter                                                     % Einrücken verhindern
+\renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}           % Default: 1.5em/2.3em
+\let\l@table\l@figure
+\makeatother
+
+\renewcommand{\thefigure}{Abb. \arabic{chapter}.\arabic{figure}} 
+\renewcommand{\thetable}{Tab. \arabic{chapter}.\arabic{table}}
+\renewcommand{\theequation}{Gl. \arabic{equation}}
+\renewcommand*{\figureformat}{\thefigure} 
+\renewcommand*{\tableformat}{\thetable} 
+\renewcommand*{\captionformat}{: }  
+
+\addtokomafont{caption}{\small\sffamily}		                   % Bild-/Tabellenunterschriften klein & serifenlos
+\addtokomafont{captionlabel}{\sffamily\bfseries}                  % Bild-/Tabelllabel fett & serifenlos
+
+\AtBeginDocument{                                                 % Doppelpunkt nach Nummern 
+  \addtocontents{lof}{\protect\def\protect\autodot{:}}% 
+  \addtocontents{lot}{\protect\def\protect\autodot{:}}% 
+} 
+
+%----------------------------------------------------------------------------------------------------------------------
+% Tabellen
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage{tabularx}
+\usepackage{stypackage/stackengine}                                % Pfeile in Tabelle
+\usepackage{varwidth}
+\usepackage{longtable}                                             % Ermöglicht Tabellen über Seitenumbruch
+\usepackage[]{threeparttable}                                      % Fußnoten in Tabellen
+\usepackage{booktabs}
+\usepackage{pdflscape}
+\usepackage{colortbl}
+\usepackage{enumitem}                                              % Liste in Tabelle
+\usepackage{arydshln}                                              % Dashedlines in Tables
+\usepackage{hhline}
+
+\newcommand\Thickvrule[1]{
+  \multicolumn{1}{!{\vrule width 1.5pt}l!{\vrule width 1.5pt}}{#1} % vertikaler Strich (1.5) LINKS & RECHTS der Zelle
+}
+\newcommand\Thickvrulel[1]{
+  \multicolumn{1}{!{\vrule width 1.5pt}l}{#1}                      % vertikaler Strich (1.5) LINKS der Zelle
+}
+\newcommand\Thickvruler[1]{
+  \multicolumn{1}{c!{\vrule width 1.5pt}}{#1}                      % vertikaler Strich (1.5) RECHTS der Zelle
+}
+\newcommand\Thinvrulel[1]{
+  \multicolumn{1}{!{\vrule width 0.75pt}l}{#1}                     % vertikaler Strich (0.75) LINKS der Zelle
+}
+\newcommand\Thinvruler[1]{
+  \multicolumn{1}{c!{\vrule width 0.75pt}}{#1}                     % vertikaler Strich (0.75) RECHTS der Zelle
+}
+
+\newcommand\stdrulel[1]{
+	\multicolumn{1}{!{\vrule}c}{#1}
+}
+\newcommand\stdruler[1]{
+	\multicolumn{1}{c!{\vrule}}{#1}
+}
+\newcommand\stdrulelinksb[1]{
+	\multicolumn{1}{!{\vrule}l!{\vrule}}{#1}
+}
+\newcommand\stdrulecent[1]{
+	\multicolumn{1}{!{\vrule}c!{\vrule}}{#1}
+}
+\newcommand\stdrulellinks[1]{
+	\multicolumn{1}{!{\vrule}l}{#1}
+}
+\newcommand\stdrulerlinks[1]{
+	\multicolumn{1}{l!{\vrule}}{#1}
+}
+
+\newcommand\RotText[1]{\rotatebox[origin=c]{90}{\parbox{1cm}{\centering#1}}}
+
+
+\newcommand{\myitem}{\item\quad}                                  % horizontaler Abstand itemize
+\newcommand{\ccol}{\cellcolor{black!20}}                          % CellColor Grau
+
+\def\RA{\rlap{\scalebox{1.6}{$\rightarrow$}}}                     % Pfeile in Tabelle zeichnen stypackage/stackengine
+\def\DA{\smash{\bclap{\scalebox{1.6}{$\downarrow$}}}}
+
+\makeatletter                    
+\def\hlinewd#1{
+\noalign{\ifnum0=`}\fi\hrule \@height #1                         % Dicke der horizontalen Linie
+\futurelet\reserved@a\@xhline}
+\makeatother
+
+\newcolumntype{Y}{>{\centering\arraybackslash}X}                 % ColumnType
+
+
+% Entwurfslayout
+\newcolumntype{V}[1]{%
+  >{\begin{varwidth}[t]{\dimexpr\textwidth-\wd#1-2\fboxsep-2\fboxrule\relax}\arraybackslash}
+    l<{\strut\end{varwidth}}}
+
+\newsavebox\Breitestes % Box für längstes „item“
+%Syntax: \Rahmen[<trenner>]{<längstes „item“>}{<tabelleninhalt>}
+\newcommand\Rahmen[3][:\qquad]{%
+  \sbox\Breitestes{#2#1}%
+  \begin{flushleft}%
+   {\renewcommand{\arraystretch}{1.2}\begin{tabular}{@{}l<{#1}@{}V{\Breitestes}@{}}
+      #3
+    \end{tabular}}%
+  \end{flushleft}
+}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Abbildungen
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage{graphicx}                                              % Einbinden von Grafiken mit Pfadangabe
+\usepackage{float}                                                 % zum genauen platzieren von Grafiken und Tabellen
+\graphicspath{{images/}}
+\usepackage{pdfpages}                                              % Einbinden PDF-Dateien
+
+
+%----------------------------------------------------------------------------------------------------------------------
+% Inhaltsverzeichnis
+%----------------------------------------------------------------------------------------------------------------------
+%\usepackage[nottoc]{tocbibind}
+\setcounter{secnumdepth}{3} 
+\renewcommand*{\theparagraph}{\thesubsubsection.\alph{paragraph}} 
+%\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+% ------ section fett im TOC
+\usepackage{tocstyle}
+\usetocstyle{allwithdot}
+%\usetocstyle{KOMAlike}
+\settocfeature[toc][1]{entryhook}{\protect\hspace*{-0.5em}\nobreakspace} % Section Horizontal in InhaltsVZ anpassen an Chapter
+\settocfeature[toc][2]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
+\settocfeature[toc][3]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
+%\settocfeature[lof][1]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace} % Kein horizontaler Einzug
+%\settocfeature[lof][2]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace} % Kein horizontaler Einzug
+%\settocfeature[lot][1]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace}
+%\settocfeature[lot][2]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace}
+
+
+\usepackage{setspace}                                            % 1,5-zeiligen Zeilenabstand
+\onehalfspacing 
+%\BeforeStartingTOC[toc]{\singlespacing} 
+
+%TIKZ zum Zeichnen
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{arrows,calc,positioning}
+\usepackage[format=hang]{subfig} %margin=10pt,
+%\usepackage{subcaption}
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{dateplot}
+
+%----------------------------------------------------------------------------------------------------------------------
+% Mathematische Formeln & Algorithmen
+%----------------------------------------------------------------------------------------------------------------------
+\usepackage[german,linesnumbered,vlined]{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{wasysym}
+\usepackage[a]{esvect}
+\usepackage{units}
+\usepackage{listings}
+
+\SetAlgorithmName{Alg.}{Alg.}{Algorithmenübersicht}               % Algorithmusname
+
+
+%----------------------------------------------------------------------------------------------------------------------
+% Symbolverzeichnis
+%----------------------------------------------------------------------------------------------------------------------
+\newcommand{\Go}{\grqq\xspace} 	                                  % Gänsefüßchen oben
+\usepackage[
+toc,				                                              % fügt das Verzeichnis dem Inhaltsverzeichnis zu
+acronym,			                                              % Abkürzungsverzeichnis hinzufügen
+%numberline,		                                              % richtet Sortierung an Chapter aus
+%description,		                                              % Beschreibung
+nonumberlist,		                                              % keine Seitenzahlen
+nopostdot]		                                                  % kein Punkt am Ende der Beschreibung
+{glossaries}
+
+\newglossary[slg]{symbols}{sls}{slo}{Symbolverzeichnis}
+
+%Define custom style for glossaries
+\newglossarystyle{mysymbstyle}{%
+\renewcommand{\glossarypreamble}{\emph{Hinweis}: Bei der Angabe der Symbole soll sich auf die Wesentlichen beschränkt werden. Die jeweils zutreffende Bedeutung ergibt sich entweder aus dem Kontext oder ist explizit im Text angegeben.}
+\renewenvironment{theglossary}% 
+{
+\begin{longtable}{@{}p{0.2\textwidth}@{}p{0.8\textwidth}}} 
+{\end{longtable}}% 
+\renewcommand*{\glossaryheader}{}% 
+\renewcommand*{\glsgroupheading}[1]{}% 
+\renewcommand*{\glossaryentryfield}[5]{% 
+\glstarget{\textbf{##1}}{\sffett{\rlap{##2}}} & ##3\glspostdescription\space ##5\\} 
+\renewcommand*{\glossarysubentryfield}[6]{% 
+\glossaryentryfield{##2}{##3}{##4}{##5}{##6}}% 
+\renewcommand*{\glsgroupskip}{ & \\} % 
+\renewcommand{\arraystretch}{1.4} 
+
+}
+
+
+ %Define custom style for glossaries
+\newglossarystyle{myacrstyle}{%
+  % full stop after every description
+    \renewcommand*{\glspostdescription}{}%
+    % put the glossary in a longtable environment:
+  % left alignment, no white in front und three columns
+    \renewenvironment{theglossary}{\begin{longtable}[l]{@{}p{0.2\textwidth}@{}p{0.8\textwidth}}}{\end{longtable}}
+    % have nothing after \begin{theglossary}:
+    \renewcommand*{\glossaryheader}{}%
+  % uncomment following line if you want headings
+    % \renewcommand*{\glossaryheader}{\bfseries Symbol & \bfseries Unit & \bfseries Description \endhead}%
+    % have nothing between glossary groups (next two commands):
+    \renewcommand*{\glsgroupheading}[1]{}%
+    % Suppress the vertical gap at the start of each group
+    \renewcommand*{\glsgroupskip}{}%
+    % set how each entry should appear:
+    \renewcommand*{\glossaryentryfield}[5]{%
+        \glstarget{##1}{##2}    % Name
+        %& ##4                	    % Symbol
+        & ##3                           % Description
+        % & ##5                       % Page list
+        \\% end of row
+    }%
+    % Sub entries treated the same as level 0 entries:
+    \renewcommand*{\glossarysubentryfield}[6]{%
+        \glossaryentryfield{##2}{##3}{##4}{##5}{##6}
+    }%
+}
+
+
+\makeglossaries
+
+\newglossaryentry{romanletter}{name={Lateinische Buchstaben}, description={}} %trennt Symbolverzeichnis in lateinische und griechische Buchstaben
+\newglossaryentry{greekletter}{name={Griechische Buchstaben}, symbol={}, description={}} %trennt Symbolverzeichnis in lateinische und griechische Buchstaben
+\newglossaryentry{mathletter}{name={Mathematische Operatoren},description={}} %trennt Symbolverzeichnis in lateinische und griechische Buchstaben
+
+
+
+%----------------------------------------------------------------------------------------------------------------------
+% Sonstiges
+%----------------------------------------------------------------------------------------------------------------------
+
+
+% Änderung des Aufzählungszeichens
+%\renewcommand{\labelitemi}{${\color{gray!80}\raisebox{.1ex}{\scalebox{.70}{$\blacksquare$}}}$}
+\renewcommand{\labelitemi}{--}
+%\renewcommand{\labelenumi}{\roman{enumi})} 
+
+
+\lstset{
+%xleftmargin= 15pt,
+numbers=left,
+numberstyle=\tiny,
+language=java,
+basicstyle=\footnotesize\sffamily,
+frame=tb,
+keepspaces=false,
+breaklines=true,
+columns=flexible,
+showstringspaces=false,
+captionpos=b,
+commentstyle=\color{gray},
+%float=[htb], 
+literate=%
+    {Ö}{{\"O}}1
+    {Ä}{{\"A}}1
+    {Ü}{{\"U}}1
+    {ß}{{\ss}}1
+    {ü}{{\"u}}1
+    {ä}{{\"a}}1
+    {ö}{{\"o}}1
+    {~}{{\textasciitilde}}1
+}
+
+\makeatletter
+\newlength{\linenumwidth} \setlength{\linenumwidth}{3em}% Redefine as required
+\newlength{\numwidth}%
+\setlength{\numwidth}{\widthof{\normalfont{\lst@numberstyle{999}}}}% Up to 2-digit (99) line numbers
+\def\lst@PlaceNumber{%
+  \makebox[\numwidth+1em][l]{%
+    \makebox[\numwidth][r]{\normalfont\lst@numberstyle{\thelstnumber}}%
+  }%
+}
+\makeatother
+
+% Save the original way of printing the number (Custom Line Numbering)
+\let\othelstnumber=\thelstnumber
+\def\createlinenumber#1#2{
+    \edef\thelstnumber{%
+        \unexpanded{%
+            \ifnum#1=\value{lstnumber}\relax
+              #2%
+            \else}%
+        \expandafter\unexpanded\expandafter{\thelstnumber\othelstnumber\fi}%
+    }
+    \ifx\othelstnumber=\relax\else
+      \let\othelstnumber\relax
+    \fi
+}
+
+
+
+% Installation der Komponenten im Anhang (CommandLine-Syntax)
+\newcommand{\cmdline}[1]{\texttt{> #1}}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+
+% Fußnoten eingerückt untereinander
+\deffootnote[]{1em}{1em}{\textsuperscript{\thefootnotemark\ }}
+
+% fügt automatisch = hinzu bei formeln
+\newenvironment{conditions}
+  {\par\vspace{\abovedisplayskip}\noindent\begin{tabular}{>{$}l<{$} @{${}={}$} l}}
+  {\end{tabular}\par\vspace{\belowdisplayskip}} 
+
+% Fußnoten über alle Kapitel absolut
+\usepackage{remreset}
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+\setkomafont{dictumtext}{\itshape\footnotesize}                     % Fußnotengröße, kursiv\renewcommand*{\dictumwidth}{.58\textwidth}                         % auf 65% der Textbreite\renewcommand*{\raggeddictumtext}{\raggedleft}                      % Text nach links aufgeflattert → rechtsbündig
+\renewcommand*{\dictumauthorformat}[1]{#1\vspace{12mm}}
+%\setkomafont{dictumauthor}{\scshape}
+\renewcommand*{\dictumrule}{}
+
+%Definition hochgestelltes Copyright-Symbol
+\def\CopTop{\textsuperscript{\textcopyright}}
+\newcommand{\sffett}[1]{\textsf{\textbf{#1}}}
+\newcommand{\mathsfbold}[1]{\boldsymbol{\mathsf{#1}}}
+
+
+%Definition neuer Column-Type
+\newcolumntype{v}[1]{%
+>{\raggedright\hspace{0pt}}p{#1}%
+}
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}
+
+% Zitat im Fließtext
+\newcommand*{\zitat}[2]{% 
+   \normalfont
+   \begin{quote} #1 #2 
+   \end{quote} 
+   \normalsize 
+} 
+
+% Spezielles eingekringeltes Plus
+\newcommand{\plus}{\text{{\large\textcircled{\normalsize \texttt{+}}}}}
+
+% Farbe definieren
+\definecolor{rotPOC}{RGB}{231 76 60}
+\definecolor{blauPOC}{RGB}{0 0 255}
+
+% Abkürzungsverzeichnis Definition der Schlüsselwörter
+\let\acrlongdat\glsuseri
+\let\acrlongplengl\glsuserii
+\let\acrlongengl\glsuseriii
+
+% pifont-Definitionen
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\quadrat}{\ding{110}}%
+\newcommand{\kreis}{\ding{108}}%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
