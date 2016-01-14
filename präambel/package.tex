@@ -247,7 +247,6 @@
 %----------------------------------------------------------------------------------------------------------------------
 % Symbolverzeichnis
 %----------------------------------------------------------------------------------------------------------------------
-\newcommand{\Go}{\grqq\xspace} 	                                  % Gänsefüßchen oben
 \usepackage[
 toc,				                                              % fügt das Verzeichnis dem Inhaltsverzeichnis zu
 acronym,			                                              % Abkürzungsverzeichnis hinzufügen
@@ -399,7 +398,10 @@ literate=%
 \@removefromreset{footnote}{chapter}
 \makeatother
 
-\setkomafont{dictumtext}{\itshape\footnotesize}                     % Fußnotengröße, kursiv\renewcommand*{\dictumwidth}{.58\textwidth}                         % auf 65% der Textbreite\renewcommand*{\raggeddictumtext}{\raggedleft}                      % Text nach links aufgeflattert → rechtsbündig
+
+\setkomafont{dictumtext}{\itshape\footnotesize}                     % Fußnotengröße, kursiv
+\renewcommand*{\dictumwidth}{.58\textwidth}                         % auf 65% der Textbreite
+\renewcommand*{\raggeddictumtext}{\raggedleft}                      % Text nach links aufgeflattert → rechtsbündig
 \renewcommand*{\dictumauthorformat}[1]{#1\vspace{12mm}}
 %\setkomafont{dictumauthor}{\scshape}
 \renewcommand*{\dictumrule}{}
