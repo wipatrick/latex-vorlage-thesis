@@ -102,6 +102,9 @@ _minted*
 # morewrites
 *.mw
 
+# symbol
+*.slo
+
 # nomencl
 *.nlo
 
@@ -124,3 +127,7 @@ sympy-plots-for-*.tex/
 # WinEdt
 *.bak
 *.sav
+
+_region_.tex
+.texpadtmp/
+prv_thesis-doc.ini
