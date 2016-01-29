@@ -8,10 +8,24 @@
 
 \setchapterpreamble[o]{%
 \dictum[--- \textsc{Jack Dangermond}, \emph{Esri}]{\Gu Knowing where things are, and why, is essential to rational decision making.\Go}}
-\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}
-\chapter{Schlussbetrachtung}
+
+% Überschreiben der Abstände vor/nach Kapitel aus package.tex für Einleitung (zwecks Zitat)
+% !!! Bei Tex 2015 Distribution auskommentieren!!!
+\RedeclareSectionCommand[
+  beforeskip=-5\baselineskip]{chapter}
+  
+% !!! Bei Tex 2014 Distribution!!!
+%\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}
+  \chapter{Schlussbetrachtung}
 \label{chap:schlussteil}
-\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
+
+% Zurücksetzen auf Standardwerte aus package.tex
+% !!! Bei Tex 2015 Distribution auskommentieren!!!
+\RedeclareSectionCommand[
+  beforeskip=-1\baselineskip]{chapter}
+
+% !!! Bei Tex 2014 Distribution auskommentieren!!!
+%\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
 
 \section{Fazit}
 \label{sec:zusammenfassung}

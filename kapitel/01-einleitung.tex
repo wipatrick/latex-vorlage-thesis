@@ -6,12 +6,28 @@
 % @created 22. November 2015
 % @edited 
 
+% Einleitungszitat
 \setchapterpreamble[o]{%
 \dictum[--- \textsc{Daniel Keys Moran}]{\Gu You can have data without information, but you cannot have information without data.\Go}}
-\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}\chapter{Einleitung}
+
+% Überschreiben der Abstände vor/nach Kapitel aus package.tex für Einleitung (zwecks Zitat)
+% !!! Bei Tex 2015 Distribution auskommentieren!!!
+\RedeclareSectionCommand[
+  beforeskip=-5\baselineskip]{chapter}
+
+% !!! Bei Tex 2014 Distribution auskommentieren!!!
+%\renewcommand{\chapterheadstartvskip}{\vspace*{3cm}}
+  \chapter{Einleitung}
 \pagenumbering{arabic}
 \setcounter{page}{1}
-\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
+
+% Zurücksetzen auf Standardwerte aus package.tex
+% !!! Bei Tex 2015 Distribution auskommentieren!!!
+\RedeclareSectionCommand[
+  beforeskip=-1\baselineskip]{chapter}
+  
+% !!! Bei Tex 2014 Distribution auskommentieren!!!
+%\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
 
 
 \section{Motivation und Problemstellung}

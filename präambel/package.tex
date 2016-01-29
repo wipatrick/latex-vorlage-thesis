@@ -63,8 +63,38 @@
 \renewcommand*{\indexpagestyle}{scrheadings}
 \usepackage[left=30mm,right=38mm,top=30mm,bottom=20mm]{geometry}
 %\addtokomafont{sectioning}{\rmfamily} %Serifenstyle für Section
-\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
-\renewcommand{\chapterheadendvskip}{\vspace*{0.7\baselineskip}}
+
+
+% ALT: wird nicht mehr benötigt
+%
+% !!! Bei Tex 2014 auskommentieren!!!
+%\renewcommand{\chapterheadstartvskip}{\vspace*{-1cm}}
+%\renewcommand{\chapterheadendvskip}{\vspace*{0.7\baselineskip}}
+%
+%
+% NEU: Möglichkeit zum Ändern des Abstandes vor und nach Überschriften (chapter, section, ...)
+%
+% !!! Bei Tex 2015 Distribution auskommentieren!!!
+%
+\RedeclareSectionCommand[
+  beforeskip=-1\baselineskip,
+  afterskip=0.4\baselineskip]{chapter}
+%\RedeclareSectionCommand[
+%  beforeskip=-1\baselineskip,
+%  afterskip=.5\baselineskip]{section}
+%\RedeclareSectionCommand[
+%  beforeskip=-.75\baselineskip,
+%  afterskip=.5\baselineskip]{subsection}
+%\RedeclareSectionCommand[
+%  beforeskip=-.5\baselineskip,
+%  afterskip=.25\baselineskip]{subsubsection}
+%\RedeclareSectionCommand[
+%  beforeskip=.5\baselineskip,
+%  afterskip=-1em]{paragraph}
+%\RedeclareSectionCommand[
+%  beforeskip=-.5\baselineskip,
+%  afterskip=-1em]{subparagraph}
+
 \setkomafont{chapterprefix}{\large} % Kapitelpräfixgröße
 \setkomafont{chapter}{\LARGE} % Kapitelgröße
 \setlength{\parskip}{0.7EM} %Paragraphen/Absatzabstand
@@ -203,9 +233,9 @@
 \usepackage{tocstyle}
 \usetocstyle{allwithdot}
 %\usetocstyle{KOMAlike}
-\settocfeature[toc][1]{entryhook}{\protect\hspace*{-0.5em}\nobreakspace} % Section Horizontal in InhaltsVZ anpassen an Chapter
-\settocfeature[toc][2]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
-\settocfeature[toc][3]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
+%\settocfeature[toc][1]{entryhook}{\protect\hspace*{-0.5em}\nobreakspace} % Section Horizontal in InhaltsVZ anpassen an Chapter
+%\settocfeature[toc][2]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
+%\settocfeature[toc][3]{entryhook}{\protect\hspace*{-0.9em}\nobreakspace} % Subsection Horizontal in InhaltsVZ anpassen an Section
 %\settocfeature[lof][1]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace} % Kein horizontaler Einzug
 %\settocfeature[lof][2]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace} % Kein horizontaler Einzug
 %\settocfeature[lot][1]{entryhook}{\protect\hspace*{-1.9em}\nobreakspace}

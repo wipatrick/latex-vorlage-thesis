@@ -34,8 +34,8 @@ listof=nochaptergap			                                   % Kein vertikaler Absta
 %----------------------------------------------------------------------------------------------------------------------
 % Abkürzungen und Symbole laden
 %----------------------------------------------------------------------------------------------------------------------
-\input{verzeichnis/acronym}
-\input{verzeichnis/symbol}
+\include{verzeichnis/acronym}
+\include{verzeichnis/symbol}
 
 %----------------------------------------------------------------------------------------------------------------------
 % Beginn des Dokuments
@@ -62,16 +62,16 @@ listof=nochaptergap			                                   % Kein vertikaler Absta
 \pagenumbering{Roman}
 \setcounter{page}{1} 
 \tableofcontents
-\clearpage
+%\clearpage
 
 % Tabellenverzeichnis 
 \setcounter{tocdepth}{2}
 \listoftables
-\clearpage
+%\clearpage
 
 % Abbildungsverzeichnis
 \listoffigures
-\clearpage
+%\clearpage
 
 % Quelltextverzeichnis
 %\renewcommand*{\thelstlisting}{List.~\arabic{lstlisting}}
