@@ -26,23 +26,23 @@ Dies ist \acrshort{zb} eine \ref{tab:zsmmuster} mit dem Paket \texttt{\textbacks
 \toprule
 
 \multicolumn{1}{c}{N\textdegree}		&
-Merkmal						&
-\multicolumn{3}{c}{Merkmalsausprägung} \\
+Characteristic						&
+\multicolumn{3}{c}{Instances} \\
 
 \cmidrule[0.4pt](r{0.25em}){1-1} 
 \cmidrule[0.4pt](lr{0.25em}){2-2}
-\cmidrule[0.4pt](lr{0.25em}){3-3}
-\cmidrule[0.4pt](lr{0.25em}){4-4}
-\cmidrule[0.4pt](l{0.25em}){5-5}
+\cmidrule[0.4pt](l{0.25em}){3-5}
+%\cmidrule[0.4pt](lr{0.25em}){4-4}
+%\cmidrule[0.4pt](l{0.25em}){5-5}
 
 1						&
-Bla					    &	
-\ccol Bla	 	        &	
-Bla			            & 	
-Bla 					\\
+Apache Project			&	
+\ccol Storm	 	        &	
+Spark			        & 	
+Flink 					\\
 
 2						&
-Bla			            &	
+Abstraction	            &	
 \ccol Bla				&	
 Bla					    &	
 Bla 					\\
@@ -78,9 +78,67 @@ Dies ist eine \ref{fig:abb1}. Das Bild ist ein Platzhalter. Das macht aber nicht
 \label{fig:abb1}
 \end{figure} 
 
+Das ist Pseudocode \ref{fig:pseudocode}.
+\IncMargin{1.5em}
+\begin{algorithm}
+\onehalfspacing
+%\vspace*{-.9cm}
+\begin{figure}[H]\small
+  \SetKwInOut{Input}{Eingabe}
+  \SetKwInOut{Output}{Ausgabe}
+\Indm  
+\Input{Testpunkt $p=(p_x, p_y)$, Polygon $P=(V, E)$, mit \\Menge Eckpunkte $V=\{v_1, v_2, \dots, v_n\}$ und \\Menge Kanten $E=\{(v_1,v_2), (v_2,v_3), \dots (v_{n-1}, v_n), (v_{n}, v_1)\}$}  \Output{Testpunkt $p$ innerhalb/außerhalb Polygon $P$}
+\Indp
+  \BlankLine  \BlankLine 
+  \For{ alle Kanten $(v_i, v_j) \in E$}{ 
+   \tcp{\textcolor{gray}{Prüfe, ob die Eckpunkte in unterschiedlichen Regionen liegen}}
+   \If {$\Big((v_{i,y}<p_y)$ und $(v_{j,y}\ge p_y)\Big)$ oder $\Big((v_{j,y}<p_y)$ und $(v_{i,y}\ge p_y)\Big)$}{
+  Berechne den Schnittpunkt $S =(S_x, S_y)$ zwischen Kante $e=(v_i, v_j)$ und \\
+     dem Strahl $r=p_y$. Aus dem Strahlensatz folgt: $S_x = v_{i,x} + \Big( \frac{\Delta y}{\Delta Y} \cdot \Delta X\Big)$\;
+  \tcp{\textcolor{gray}{Prüfe, ob der Schnittpunkt rechts des Testpunkts liegt}}
+   \If {$S_x \ge p_x$}{Erhöhe den Zähler um $1$.}
+}
+}
+\tcp{\textcolor{gray}{Nachdem alle Kanten durchlaufen wurden, tue Folgendes:}}
+\eIf {Zähler ist ungerade, d.h. $2k+1$, $\forall k\in \mathbb{N}$}{innerhalb\;}{\tcp{\textcolor{gray}{Zähler ist gerade, d.h. $2k$, $\forall k\in \mathbb{N}$}}außerhalb\;}
+\caption[Pseudocode Punkt-in-Polygon Algorithmus]{Pseudocode Punkt-in-Polygon Algorithmus.}
+\label{fig:pseudocode}
+\end{figure}
+\end{algorithm}
+\DecMargin{1.5em}
+
+
+Dies ist weiterer Quelltext \ref{fig:punktinpolygon}.
+\begin{figure}[H]
+\begin{lstlisting}[firstnumber=11]
+public boolean enthaeltKoordinate( double lat, double lng ) {
+
+    boolean ungAnzSchnittpkt = false;
+    int i, j = polyKanten - 1;
+
+    for( i = 0; i < polyKanten; i++ ) {
+        if(( LngArr[ i ] < lng && LngArr[ j ] >= lng ) ||
+           ( LngArr[ j ] < lng && LngArr[ i ] >= lng )) {
+            if( LatArr[ i ] + (( lng - LngArr[ i ] ) / 
+              ( LngArr[ j ] - LngArr[ i ] ) * ( LatArr[ j ] - LatArr[ i ] )) >= lat ) {
+                ungAnzSchnittpkt = !ungAnzSchnittpkt;
+            }
+        }
+        j = i;
+    }
+    return ungAnzSchnittpkt;
+} // Ende enthaeltKoordinate()-Methode
+\end{lstlisting}
+\caption[Auszug der PunktInPolygon-Klasse]{Auszug der \texttt{PunktInPolygon}-Klasse. Dieser zeigt die Implementierung des Punkt-in-Polygon Algorithmus.}
+\label{fig:punktinpolygon}
+\end{figure} 
+
+
 
 
 \section{Section}
+
+
 
 \subsection{Subsection}
 
